@@ -25,7 +25,7 @@ const questions = [
         message: "How do you use your project?"
     },
     {
-        type: "checkbox",
+        type: "input",
         name: "license",
         message: "What license is being used?"
     },
@@ -42,10 +42,20 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(fileName, data);
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions)
+    .then(function(data){
+        console.log(data);
+        writeToFile('README.md', generateMarkdown(data));
+    }) 
+    
+}
+
 
 // Function call to initialize app
 init();
